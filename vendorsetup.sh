@@ -28,3 +28,4 @@
 #
 
 add_lunch_combo aosp_guacamole-userdebug
+add_lunch_combo ev_guacamole-userdebug
