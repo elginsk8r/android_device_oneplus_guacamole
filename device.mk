@@ -21,8 +21,8 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    vendor.lineage.camera.motor@1.0 \
-    vendor.lineage.camera.motor@1.0-service.oneplus_msmnile \
+    vendor.evervolv.camera.motor@1.0 \
+    vendor.evervolv.camera.motor@1.0-service.oneplus_msmnile \
     OnePlusCameraHelper
 
 # Characteristics
