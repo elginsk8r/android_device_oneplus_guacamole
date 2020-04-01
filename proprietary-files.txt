@@ -14,7 +14,6 @@ vendor/etc/acdbdata/MTP/MTP_workspaceFile.qwsp
 
 # Audio
 vendor/lib/hw/audio.primary.msmnile.so
-vendor/lib64/hw/audio.primary.msmnile.so
 
 # Camera
 vendor/lib/camera/components/com.oneplus.node.bokeh.so
