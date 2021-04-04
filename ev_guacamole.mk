@@ -27,11 +27,11 @@ $(call inherit-product, $(SRC_EVERVOLV_DIR)/config/common_full_phone.mk)
 BOOT_ANIMATION_SIZE := 1440p
 
 # Build info
-BUILD_FINGERPRINT := "OnePlus/OnePlus7Pro/OnePlus7Pro:10/QKQ1.190716.003/1909110008:user/release-keys"
+BUILD_FINGERPRINT := "OnePlus/OnePlus7Pro/OnePlus7Pro:11/RKQ1.201022.002/2103102330:user/release-keys"
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_DEVICE=OnePlus7Pro \
     PRODUCT_NAME=OnePlus7Pro \
-    PRIVATE_BUILD_DESC="OnePlus7Pro-user 10 QKQ1.190716.003 1909110008 release-keys"
+    PRIVATE_BUILD_DESC="OnePlus7Pro-user 11 RKQ1.201022.002 2103102330 release-keys"
 
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
 
