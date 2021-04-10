@@ -23,6 +23,9 @@ PRODUCT_MODEL := guacamole
 # Inherit some common evervolv stuff.
 $(call inherit-product, $(SRC_EVERVOLV_DIR)/config/common_full_phone.mk)
 
+# Inherit evervolv overlays.
+DEVICE_PACKAGE_OVERLAYS += device/oneplus/guacamole/overlay-ev
+
 # Bootanimation
 BOOT_ANIMATION_SIZE := 1440p
 
