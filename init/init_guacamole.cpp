@@ -42,6 +42,16 @@ constexpr const char* RO_PROP_SOURCES[] = {
         nullptr, "product.", "odm.", "vendor.", "system_ext.", "system.", "bootimage.",
 };
 
+constexpr const char* BUILD_DESCRIPTION[] = {
+        "OnePlus7Pro-user 11 RKQ1.201022.002 2103161151 release-keys",
+        "OnePlus7ProTMO-user 11 RKQ1.201022.002 2103190237 release-keys",
+};
+
+constexpr const char* BUILD_FINGERPRINT[] = {
+        "OnePlus/OnePlus7Pro/OnePlus7Pro:11/RKQ1.201022.002/2103161151:user/release-keys",
+        "OnePlus/OnePlus7ProTMO/OnePlus7ProTMO:11/RKQ1.201022.002/2103190237:user/release-keys",
+};
+
 void property_override(char const prop[], char const value[], bool add = true)
 {
     auto pi = (prop_info *) __system_property_find(prop);
@@ -53,7 +63,7 @@ void property_override(char const prop[], char const value[], bool add = true)
     }
 }
 
-void load_props(const char* model) {
+void load_props(const char* model, bool is_tmo) {
     const auto ro_prop_override = [](const char* source, const char* prop, const char* value,
                                      bool product) {
         std::string prop_name = "ro.";
@@ -67,36 +77,35 @@ void load_props(const char* model) {
     };
 
     for (const auto& source : RO_PROP_SOURCES) {
+        ro_prop_override(source, "device", is_tmo ? "OnePlus7ProTMO" : "OnePlus7Pro", true);
         ro_prop_override(source, "model", model, true);
+        ro_prop_override(source, "fingerprint", BUILD_FINGERPRINT[is_tmo ? 1 : 0],
+                         false);
     }
+    ro_prop_override(nullptr, "description", BUILD_DESCRIPTION[is_tmo ? 1 : 0], false);
+    ro_prop_override(nullptr, "product", is_tmo ? "OnePlus7ProTMO" : "OnePlus7Pro", false);
 }
 }  // anonymous namespace
 
 void vendor_load_properties() {
-    int project_name = stoi(android::base::GetProperty("ro.boot.project_name", ""));
-    if (project_name == 18831) {
-        /* T-Mobile */
-        load_props("GM1915");
-        return;
-    }
-
     int rf_version = stoi(android::base::GetProperty("ro.boot.rf_version", ""));
     switch (rf_version){
         case 1:
             /* China*/
-            load_props("GM1910");
+            load_props("GM1910", false);
             break;
         case 3:
             /* India*/
-            load_props("GM1911");
+            load_props("GM1911", false);
             break;
         case 4:
             /* Europe */
-            load_props("GM1913");
+            load_props("GM1913", false);
             break;
         default:
-            /* Generic / Global / US Unlocked */
-            load_props("GM1917");
+            /* T-Mobile / Global / US Unlocked */
+            int project_name = stoi(android::base::GetProperty("ro.boot.project_name", ""));
+            load_props(project_name == 18831 ? "GM1915" : "GM1917", project_name == 18831);
             break;
     }
 }
