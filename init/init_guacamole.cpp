@@ -77,6 +77,7 @@ void load_props(const char* model, bool is_tmo) {
     };
 
     for (const auto& source : RO_PROP_SOURCES) {
+        ro_prop_override(source, "name", is_tmo ? "OnePlus7ProTMO" : "OnePlus7Pro", true);
         ro_prop_override(source, "device", is_tmo ? "OnePlus7ProTMO" : "OnePlus7Pro", true);
         ro_prop_override(source, "model", model, true);
         ro_prop_override(source, "fingerprint", BUILD_FINGERPRINT[is_tmo ? 1 : 0],
